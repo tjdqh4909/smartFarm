@@ -13,12 +13,17 @@
             android:layout_width="match_parent"
             android:layout_height="273dp"
             android:background="@drawable/blue_bg">
-            <ImageView
-                android:layout_width="77dp"
-                android:layout_height="77dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="93dp"
-                android:background="#ffffff"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="힐 링 팜"
+                android:fontFamily="@font/maplestory_bold"
+                android:textSize="50dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal">
+
+            </TextView>
         </FrameLayout>
 
         <!--에디트 박스 시작-->
@@ -102,7 +107,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/maplestory_bold"
                 android:hint="이름"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
@@ -135,7 +140,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/maplestory_bold"
                 android:hint="나이"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
