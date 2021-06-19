@@ -48,7 +48,8 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:text="ssb"/>
             <ImageView
                 android:id="@+id/loginName_icon"
                 android:layout_width="14.7dp"
@@ -81,7 +82,8 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:text="1234"/>
             <!-- ICON -->
             <ImageView
                 android:id="@+id/loginPassword_icon"
