@@ -41,6 +41,20 @@ import static java.lang.Thread.sleep;
 
 public class SecondFragment extends Fragment implements View.OnClickListener {
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public SecondFragment() {
+        // Required empty public constructor
+    }
+
+
     private static String TAG = "phptest_MainActivity";
 
     private static final String TAG_JSON="temp";
@@ -56,11 +70,17 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     String mJsonString;
     Button btn;
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Toast.makeText(this.getContext(), "온습도 상황판", Toast.LENGTH_SHORT).show();
         View v = inflater.inflate(R.layout.fragment_second, container, false);
 
         mTextViewResult = (TextView)v.findViewById(R.id.textView_main_result);
@@ -69,10 +89,11 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         btn = (Button)v.findViewById(R.id.btn);
 
         GetData task = new GetData();
-        task.execute("http://192.168.43.105/getjson.php");
+        task.execute("http://192.168.219.103/getjson.php");
 
         btn.setOnClickListener(this);
 
+        //Toast.makeText(this.getContext(), "메세지!!", Toast.LENGTH_SHORT).show();
 
         return v;
     }

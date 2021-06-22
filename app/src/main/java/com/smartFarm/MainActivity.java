@@ -2,6 +2,8 @@ package com.smartFarm;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,36 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     NavigationView navigationView;
     TextView loginUser;
     Menu menu;
+
+    /* 권한 체크 */
+    static final int PERMISSION_REQUEST_CODE = 1;
+    String[] PERMISSIONS = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+    private File outputFile; //파일명까지 포함한 경로
+    private File path;//디렉토리경로
+
+    private boolean hasPermissions(String[] permissions) {
+        int res = 0;
+        //스트링 배열에 있는 퍼미션들의 허가 상태 여부 확인
+        for (String perms : permissions){
+            res = checkCallingOrSelfPermission(perms);
+            if (!(res == PackageManager.PERMISSION_GRANTED)){
+                //퍼미션 허가 안된 경우
+                return false;
+            }
+
+        }
+        //퍼미션이 허가된 경우
+        return true;
+    }
+
+
+    private void requestNecessaryPermissions(String[] permissions) {
+        //마시멜로( API 23 )이상에서 런타임 퍼미션(Runtime Permission) 요청
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +139,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         tabLayout.getTabAt(1).setIcon(R.drawable.light);
         tabLayout.getTabAt(2).setIcon(R.drawable.video);
 
+
+
+        /* 권한 설정 */
+        if (!hasPermissions(PERMISSIONS)) { //퍼미션 허가를 했었는지 여부를 확인
+            requestNecessaryPermissions(PERMISSIONS);//퍼미션 허가안되어 있다면 사용자에게 요청
+        } else {
+            //이미 사용자에게 퍼미션 허가를 받음.
+        }
 
 
     }
@@ -172,6 +213,52 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 })
                 .setNegativeButton("취소", null)
                 .show();
+    }
+
+
+    /*권한 설정관련*/
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults){
+        switch(permsRequestCode){
+
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean readAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                        if ( !readAccepted || !writeAccepted  )
+                        {
+                            showDialogforPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
+                            return;
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    private void showDialogforPermission(String msg) {
+
+        final AlertDialog.Builder myDialog = new AlertDialog.Builder(  MainActivity.this);
+        myDialog.setTitle("알림");
+        myDialog.setMessage(msg);
+        myDialog.setCancelable(false);
+        myDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(PERMISSIONS, PERMISSION_REQUEST_CODE);
+                }
+
+            }
+        });
+        myDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                finish();
+            }
+        });
+        myDialog.show();
     }
 
 }
