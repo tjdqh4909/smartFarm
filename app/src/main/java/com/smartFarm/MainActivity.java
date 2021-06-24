@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private FirstFragment firstFragment;
     private SecondFragment secondFragment;
     private ThirdFragment thirdFragment;
+    private FourthFragment fourthFragment;
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         firstFragment = new FirstFragment();
         secondFragment = new SecondFragment();
         thirdFragment = new ThirdFragment();
+        fourthFragment = new FourthFragment();
 
         /*로그인 정보를 가져옴*/
         Intent intent = getIntent();
@@ -133,11 +135,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         viewPagerAdapter.addFragment(firstFragment, "홈");
         viewPagerAdapter.addFragment(secondFragment, "온습도");
         viewPagerAdapter.addFragment(thirdFragment, "타임랩스");
+        viewPagerAdapter.addFragment(fourthFragment, "게시판");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.getTabAt(0).setIcon(R.drawable.home);
         tabLayout.getTabAt(1).setIcon(R.drawable.light);
         tabLayout.getTabAt(2).setIcon(R.drawable.video);
+        tabLayout.getTabAt(3).setIcon(R.drawable.board);
 
 
 

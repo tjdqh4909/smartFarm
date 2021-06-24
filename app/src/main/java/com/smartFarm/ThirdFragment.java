@@ -91,7 +91,7 @@ public class  ThirdFragment extends Fragment {
 
                 Log.d("test", "절대 경로 : " + path);
 
-                vv.setVideoPath(path_sd+"/Download/video.avi");
+                vv.setVideoPath(path_sd+"/Download/jorupE.avi");
                 vv.requestFocus();
                 vv.start();
             }

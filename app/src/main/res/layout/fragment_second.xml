@@ -1,90 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SecondFragment"
-    android:layout_margin="15dp"
-    android:padding="10dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="0"
-        android:padding="10dp">
-
-
-        <TextView
-            android:id="@+id/Timedata"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="15"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="날짜"/>
-
-
-        <TextView
-            android:id="@+id/Temperature"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="온도"/>
-
-
-        <TextView
-            android:id="@+id/Humidity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="습도"/>
-
-        <TextView
-            android:id="@+id/soilDry_count"
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="건조"/>
-        <TextView
-            android:id="@+id/waterEmpty_count"
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="여분"/>
-
-
-    </LinearLayout>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:id="@+id/listView_main_list" />
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="갱신"></Button>
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도"
+        android:textSize="25dp"
+        android:textColor="#FF0000"/>
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart_tem"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:id="@+id/textView_main_result" />
+        android:layout_height="250dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도"
+        android:textSize="25dp"
+        android:textColor="#0000FF"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart_hum"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="갱신하기"
+        android:id="@+id/renew"/>
 
 </LinearLayout>
