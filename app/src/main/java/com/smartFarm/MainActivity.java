@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(com.smartFarm.MainActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                         //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                     }

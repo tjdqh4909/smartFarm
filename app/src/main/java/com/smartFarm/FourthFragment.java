@@ -73,16 +73,17 @@ public class FourthFragment extends Fragment {
 
         list_itemArrayList = new ArrayList<list_item>();
 
+
         list_itemArrayList.add(
-                new list_item("https://lh3.googleusercontent.com/proxy/jS7ZF2UoQONPCULQT5VIHMK382MfmP8OM1RkZpH8fEIPOFp7OBX-qKiCpQ75v5X_qkErJ0xitgqa_2XhdlOSTPF_Wa7GKdyIaK-A-w0j3g6omV7JVHI","닉네임1","제목1",new Date(System.currentTimeMillis()),"내용1"));
+                new list_item("https://mblogthumb-phinf.pstatic.net/MjAxODA0MDVfMjkx/MDAxNTIyODkzMjgyNjE1.Tmod6kvz5nXsfJ1ZvsJ5MA9jPXW1quxiExIkkN8p2gQg.l48iSIIJJHrvGZj7UCYML6a5H40W_q2rPY7-nmRKx0kg.JPEG.missj5790/2018-04-05-10-50-52.jpg?type=w800","지원","화분에 싹이 났어요",new Date(System.currentTimeMillis())," "));
         list_itemArrayList.add(
-                new list_item("https://lh3.googleusercontent.com/proxy/jS7ZF2UoQONPCULQT5VIHMK382MfmP8OM1RkZpH8fEIPOFp7OBX-qKiCpQ75v5X_qkErJ0xitgqa_2XhdlOSTPF_Wa7GKdyIaK-A-w0j3g6omV7JVHI","닉네임2","제목2",new Date(System.currentTimeMillis()),"내용2"));
+                new list_item("https://pbs.twimg.com/media/ECt7cCDUEAEVoIb.jpg","지훈","저희 집 아보카도 입니다~",new Date(System.currentTimeMillis())," "));
         list_itemArrayList.add(
-                new list_item("https://lh3.googleusercontent.com/proxy/jS7ZF2UoQONPCULQT5VIHMK382MfmP8OM1RkZpH8fEIPOFp7OBX-qKiCpQ75v5X_qkErJ0xitgqa_2XhdlOSTPF_Wa7GKdyIaK-A-w0j3g6omV7JVHI","닉네임3","제목3",new Date(System.currentTimeMillis()),"내용3"));
+                new list_item("https://t1.daumcdn.net/cfile/tistory/99CC8B455EC5E14E31","유림","밤 싹틔우기까지!",new Date(System.currentTimeMillis())," "));
         list_itemArrayList.add(
-                new list_item("https://lh3.googleusercontent.com/proxy/jS7ZF2UoQONPCULQT5VIHMK382MfmP8OM1RkZpH8fEIPOFp7OBX-qKiCpQ75v5X_qkErJ0xitgqa_2XhdlOSTPF_Wa7GKdyIaK-A-w0j3g6omV7JVHI","닉네임4","제목4",new Date(System.currentTimeMillis()),"내용4"));
+                new list_item("https://lh3.googleusercontent.com/proxy/7C7Vr4rk8J5p91OBTlcaJxoS1NdYTQHr6u-sX9_dZiM8k8zgiki6PAZTALW0D6sB2Ih3hAqvSEnvNqeLAms-8Id3twqx3ICLhknyBvo2sHjkGA48ISk2dGWdkIScwrs7rky9wDSYvwORNQDTXIuQ-hKIZgRSK1Xw10eL2w","성보","이거 시들고 있는건가요?ㅠㅠ",new Date(System.currentTimeMillis())," "));
         list_itemArrayList.add(
-                new list_item("https://lh3.googleusercontent.com/proxy/jS7ZF2UoQONPCULQT5VIHMK382MfmP8OM1RkZpH8fEIPOFp7OBX-qKiCpQ75v5X_qkErJ0xitgqa_2XhdlOSTPF_Wa7GKdyIaK-A-w0j3g6omV7JVHI","닉네임5","제목5",new Date(System.currentTimeMillis()),"내용5"));
+                new list_item("https://blog.kakaocdn.net/dn/G1k5A/btqEFDSRDhH/b46cmPuLkrKE7LG9BLwWxK/img.jpg","익주","방울토마토 키우기 2편",new Date(System.currentTimeMillis())," "));
 
         myListAdapter = new MyListAdapter(getContext(),list_itemArrayList);
         listView.setAdapter(myListAdapter);

@@ -1,20 +1,13 @@
 package com.smartFarm;
 
-import android.app.ProgressDialog;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -27,49 +20,16 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class SecondFragment extends Fragment {
 
-    //라인차트 선언
+    //--라인차트 선언
     private LineChart lineChart1;
     private LineChart lineChart2;
-
-    //데이터 가져오기 관련 선언
-    String Timedata;
-    String Temperature;
-    String Humidity;
-    String soilDry_count;
-    String waterEmpty_count;
-
-    private static String TAG = "phptest_MainActivity";
-
-    private static final String TAG_JSON="temp";
-    private static final String TAG_Timedata = "Timedata";
-    private static final String TAG_Temperature = "Temperature";
-    private static final String TAG_Humidity = "Humidity";
-    private static final String TAG_soilDry_count = "soilDry_count";
-    private static final String TAG_waterEmpty_count = "waterEmpty_count";
-
-    private TextView mTextViewResult;
-    ArrayList<HashMap<String, String>> mArrayList;
-    ListView mlistView;
-    String mJsonString;
-    Button btn;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -120,27 +80,8 @@ public class SecondFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_second, container, false);
 
-        //데이터 가져오기
-        btn = (Button)v.findViewById(R.id.renew);
-
-        GetData task = new GetData();
-        task.execute("http://192.168.43.105/getjson.php");
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(getTargetFragment()).attach(getTargetFragment()).commit();
-            }
-        });
-
         lineChart1 = (LineChart) v.findViewById(R.id.chart_tem);
         lineChart2 = (LineChart) v.findViewById(R.id.chart_hum);
-
-
-
-
-
 
         // 데이터 설정
         List<Entry> entries1 = new ArrayList<>();
@@ -262,7 +203,6 @@ public class SecondFragment extends Fragment {
         return v;
     }
 
-
     class DateFormatter extends ValueFormatter implements IAxisValueFormatter {
 
         Calendar mCalender;
@@ -283,115 +223,6 @@ public class SecondFragment extends Fragment {
             strDate = "" + mCalender.get(Calendar.YEAR) + "-" + (mCalender.get(Calendar.MONTH) + 1) + "-" + mCalender.get(Calendar.DATE);
 
             return strDate;
-        }
-    }
-
-
-    //데이터 가져오기
-    private class GetData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
-        String errorString = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = ProgressDialog.show(getActivity(),
-                    "Please Wait", null, true, true);
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            progressDialog.dismiss();
-            mTextViewResult.setText(result);
-            Log.d(TAG, "response  - " + result);
-
-            if (result == null){
-
-                mTextViewResult.setText(errorString);
-            }
-            else {
-                mJsonString = result;
-                try {
-                    JSONObject jsonObject = new JSONObject(mJsonString);
-                    JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
-                    for(int i=0;i<jsonArray.length();i++){
-
-                        JSONObject item = jsonArray.getJSONObject(i);
-
-                        Timedata = item.getString(TAG_Timedata);
-                        Temperature = item.getString(TAG_Temperature);
-                        Humidity = item.getString(TAG_Humidity);
-                        soilDry_count = item.getString(TAG_soilDry_count);
-                        waterEmpty_count = item.getString(TAG_waterEmpty_count);
-                    }
-
-                } catch (JSONException e) {
-
-                    Log.d(TAG, "showResult : ", e);
-                }
-            }
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String serverURL = params[0];
-
-
-            try {
-
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.connect();
-
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "response code - " + responseStatusCode);
-
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else{
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-
-                while((line = bufferedReader.readLine()) != null){
-                    sb.append(line);
-                }
-
-
-                bufferedReader.close();
-
-
-                return sb.toString().trim();
-
-
-            } catch (Exception e) {
-
-                Log.d(TAG, "InsertData: Error ", e);
-                errorString = e.toString();
-
-                return null;
-            }
-
         }
     }
 

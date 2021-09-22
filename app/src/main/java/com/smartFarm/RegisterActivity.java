@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String success = jsonObject.getString("success");
                     if (success != null && success.equals("1")) {  // 회원가입 완료
                         Toast.makeText(getApplicationContext(),"회원가입 성공!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(com.smartFarm.RegisterActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

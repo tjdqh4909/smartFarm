@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.smartFarm.LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     String success = jsonObject.getString("success");
                     if (success != null && success.equals("1")) {
                         Toast.makeText(getApplicationContext(),"로그인 성공!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(com.smartFarm.LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("userID",userID);
                         startActivity(intent);
                         finish();
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         // Volley 로 로그인 양식 웹전송
-        LoginRequest loginRequest = new com.smartFarm.LoginRequest(userID,userPassword,responseListener,errorListener);
+        LoginRequest loginRequest = new LoginRequest(userID,userPassword,responseListener,errorListener);
         loginRequest.setShouldCache(false);
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
